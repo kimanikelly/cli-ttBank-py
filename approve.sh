@@ -1,0 +1,1 @@
+python3 ./app/ttBank.py approve-bank $1
