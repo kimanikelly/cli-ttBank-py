@@ -39,7 +39,7 @@ def cli():
     pass
 
 
-@cli.command()
+@cli.command("approve-bank")
 @click.argument("amount")
 def approve_bank(amount: int):
 
@@ -52,6 +52,72 @@ def approve_bank(amount: int):
 
     click.echo(
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
+
+
+@cli.command("open-account")
+@click.argument("starting-balance")
+def open_account(starting_balance):
+    sign_open_account_tx = w3.eth.account.sign_transaction(
+        ttBank.open_account(starting_balance), private_key=os.getenv("PRIVATE_KEY")
+    )
+
+    tx_hash = w3.eth.send_raw_transaction(sign_open_account_tx.rawTransaction)
+
+    goerli_url = "https://goerli.etherscan.io/tx/" + HexBytes.hex(tx_hash)
+
+    click.echo(
+        f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
+
+
+@cli.command("deposit")
+@click.argument("amount")
+def deposit(amount: int):
+    sign_deposit_tx = w3.eth.account.sign_transaction(
+        ttBank.deposit(amount), private_key=os.getenv("PRIVATE_KEY")
+    )
+    tx_hash = w3.eth.send_raw_transaction(sign_deposit_tx.rawTransaction)
+
+    goerli_url = "https://goerli.etherscan.io/tx/" + HexBytes.hex(tx_hash)
+
+    click.echo(
+        f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
+
+
+@cli.command("withdraw")
+@click.argument("amount")
+def open_account(amount):
+    sign_withdraw_tx = w3.eth.account.sign_transaction(
+        ttBank.withdraw(amount), private_key=os.getenv("PRIVATE_KEY")
+    )
+
+    tx_hash = w3.eth.send_raw_transaction(sign_withdraw_tx.rawTransaction)
+
+    goerli_url = "https://goerli.etherscan.io/tx/" + HexBytes.hex(tx_hash)
+
+    click.echo(
+        f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
+
+
+@cli.command("view-account")
+def view_account():
+
+    click.echo({
+        "account_number": ttBank.fetch_account()[0],
+        "account_name": ttBank.fetch_account()[1],
+        "account_balance": ttBank.fetch_account()[2]
+    })
+
+
+@cli.command("view-account-balance")
+def view_account_balance():
+
+    click.echo(w3.fromWei(ttBank.fetch_account_balance(), 'ether'))
+
+
+@cli.command("view-bank-balance")
+def view_bank_balance():
+
+    click.echo(w3.fromWei(ttBank.fetch_bank_balance(), 'ether'))
 
 
 if __name__ == '__main__':
