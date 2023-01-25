@@ -83,9 +83,9 @@ def deposit(amount: int):
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
 
 
-@cli.command("withdraw", "Allows the connected wallet to withdraw Test Tokens from their existing account")
+@cli.command("withdraw", help="Allows the connected wallet to withdraw Test Tokens from their existing account")
 @click.argument("amount")
-def open_account(amount):
+def withdraw(amount):
     sign_withdraw_tx = w3.eth.account.sign_transaction(
         ttBank.withdraw(amount), private_key=os.getenv("PRIVATE_KEY")
     )
@@ -98,27 +98,29 @@ def open_account(amount):
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
 
 
-@cli.command("view-account")
+@cli.command("view-account", help="Allows the connected wallet to view their Account Number, Account Name, and Account Balance")
 def view_account():
 
-    click.echo({
-        "account_number": ttBank.fetch_account()[0],
-        "account_name": ttBank.fetch_account()[1],
-        "account_balance": int(w3.fromWei(ttBank.fetch_account()[2], 'ether'))
-    })
+    click.echo(
+        f"Account Number: {click.style(ttBank.fetch_account()[0],fg='magenta')}")
+    click.echo(
+        f"Account Name: {click.style(ttBank.fetch_account()[1],fg='magenta')}")
+    click.echo(
+        f"Account Balance: {click.style(w3.fromWei(ttBank.fetch_account()[2],'ether'),fg='magenta')} TT")
 
 
-@cli.command("view-account-balance")
+@ cli.command("view-account-balance", help="Allows the connected wallet to view their Account Balance")
 def view_account_balance():
 
     click.echo(
-        f"{ttBank.address +   click.style(w3.fromWei(ttBank.fetch_account_balance(), 'ether'),fg='magenta')} TT")
+        f"The account balance of {click.style(ttBank.account,fg='magenta')} is: {click.style(w3.fromWei(ttBank.fetch_account_balance(), 'ether'),fg='magenta')} TT")
 
 
-@cli.command("view-bank-balance")
+@ cli.command("view-bank-balance", help="Allows the connected wallet to view the TTBank balance")
 def view_bank_balance():
 
-    click.echo(w3.fromWei(ttBank.fetch_bank_balance(), 'ether'))
+    click.echo(
+        f"The bank balance is: {click.style(w3.fromWei(ttBank.fetch_bank_balance(), 'ether'),fg='magenta')} TT")
 
 
 if __name__ == '__main__':
