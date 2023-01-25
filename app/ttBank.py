@@ -54,7 +54,7 @@ def approve_bank(amount: int):
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
 
 
-@cli.command("open-account")
+@cli.command("open-account", help="Allows the msg.sender to open an account with TTBank and make an initial deposit")
 @click.argument("starting-balance")
 def open_account(starting_balance):
     sign_open_account_tx = w3.eth.account.sign_transaction(
@@ -104,14 +104,15 @@ def view_account():
     click.echo({
         "account_number": ttBank.fetch_account()[0],
         "account_name": ttBank.fetch_account()[1],
-        "account_balance": ttBank.fetch_account()[2]
+        "account_balance": int(w3.fromWei(ttBank.fetch_account()[2], 'ether'))
     })
 
 
 @cli.command("view-account-balance")
 def view_account_balance():
 
-    click.echo(w3.fromWei(ttBank.fetch_account_balance(), 'ether'))
+    click.echo(
+        f"{ttBank.address +   click.style(w3.fromWei(ttBank.fetch_account_balance(), 'ether'),fg='magenta')} TT")
 
 
 @cli.command("view-bank-balance")
