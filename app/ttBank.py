@@ -69,7 +69,7 @@ def open_account(starting_balance):
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
 
 
-@cli.command("deposit")
+@cli.command("deposit", help="Allows the connected wallet with an existing account to deposit Test Tokens")
 @click.argument("amount")
 def deposit(amount: int):
     sign_deposit_tx = w3.eth.account.sign_transaction(
