@@ -39,7 +39,7 @@ def cli():
     pass
 
 
-@cli.command("approve-bank")
+@cli.command("approve-bank", help="Allows the connected wallet to approve TTBank for a set amount of Test Tokens before opening an account and depositing ")
 @click.argument("amount")
 def approve_bank(amount: int):
 
@@ -54,7 +54,7 @@ def approve_bank(amount: int):
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
 
 
-@cli.command("open-account", help="Allows the msg.sender to open an account with TTBank and make an initial deposit")
+@cli.command("open-account", help="Allows the connected wallet to open an account with TTBank and make an initial deposit")
 @click.argument("starting-balance")
 def open_account(starting_balance):
     sign_open_account_tx = w3.eth.account.sign_transaction(
