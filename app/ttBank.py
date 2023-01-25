@@ -83,7 +83,7 @@ def deposit(amount: int):
         f"Transaction Hash: {click.style(goerli_url,fg='magenta')}")
 
 
-@cli.command("withdraw")
+@cli.command("withdraw", "Allows the connected wallet to withdraw Test Tokens from their existing account")
 @click.argument("amount")
 def open_account(amount):
     sign_withdraw_tx = w3.eth.account.sign_transaction(
