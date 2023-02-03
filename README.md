@@ -1,5 +1,19 @@
 # cli-ttBank-py
 
+## Source Code Installation
+
+Clone the repo
+
+```
+git clone https://github.com/kimanikelly/cli-ttBank-py.git
+```
+
+Install the dependencies
+
+```
+pip install -r ./requirements.txt
+```
+
 ## CLI Commands
 
 - [approve-bank](docs/approveBank.md)
