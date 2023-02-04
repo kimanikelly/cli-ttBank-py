@@ -17,9 +17,9 @@ pip install -r ./requirements.txt
 ## CLI Commands
 
 - [approve-bank](docs/approveBank.md)
-- [deposit](docs/deposit.md)
 - [open-account](docs/openAccount.md)
 - [view-account](docs/viewAccount.md)
 - [view-account-balance](docs/viewAccountBalance.md)
 - [view-bank-balance](docs/viewBankBalance.md)
+- [deposit](docs/deposit.md)
 - [withdraw](docs/withdraw.md)
