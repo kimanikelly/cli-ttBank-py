@@ -14,6 +14,16 @@ Install the dependencies
 pip install -r ./requirements.txt
 ```
 
+## Setup Environment Variables
+
+Create a .env file
+
+```
+touch .env
+```
+
+After creating the .env file set the environment variables by using [.env.example](.env.example) as a template
+
 ## CLI Commands
 
 - [approve-bank](docs/approveBank.md)
