@@ -106,21 +106,21 @@ def view_account():
     click.echo(
         f"Account Name: {click.style(ttBank.fetch_account()[1],fg='magenta')}")
     click.echo(
-        f"Account Balance: {click.style(w3.fromWei(ttBank.fetch_account()[2],'ether'),fg='magenta')} TT")
+        f"Account Balance: {click.style(w3.from_wei(ttBank.fetch_account()[2],'ether'),fg='magenta')} TT")
 
 
 @ cli.command("view-account-balance", help="Allows the connected wallet to view their Account Balance")
 def view_account_balance():
 
     click.echo(
-        f"The account balance of {click.style(ttBank.account,fg='magenta')} is: {click.style(w3.fromWei(ttBank.fetch_account_balance(), 'ether'),fg='magenta')} TT")
+        f"The account balance of {click.style(ttBank.account,fg='magenta')} is: {click.style(w3.from_wei(ttBank.fetch_account_balance(), 'ether'),fg='magenta')} TT")
 
 
 @ cli.command("view-bank-balance", help="Allows the connected wallet to view the TTBank balance")
 def view_bank_balance():
 
     click.echo(
-        f"The bank balance is: {click.style(w3.fromWei(ttBank.fetch_bank_balance(), 'ether'),fg='magenta')} TT")
+        f"The bank balance is: {click.style(w3.from_wei(ttBank.fetch_bank_balance(), 'ether'),fg='magenta')} TT")
 
 
 if __name__ == '__main__':
